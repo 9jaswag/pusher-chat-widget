@@ -38,3 +38,21 @@ $(document).ready =>
         console.log data
         return
     return
+  
+  updateChat = (data) ->
+    $('.chats').append """
+      <div class="chat-bubble-wrapper d-block">
+        <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block">
+          <small class="chat-username">#{data.name}</small>
+          <p class="m-0 chat-message">#{data.message}</p>
+        </div>
+      </div>
+    """
+    return
+
+  $('#chat-form').on 'ajax:success', (data) ->
+    chat = data.detail[0]
+    console.log chat
+    updateChat chat
+    $('#chat-form')[0].reset()
+    return
