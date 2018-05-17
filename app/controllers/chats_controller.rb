@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   def index
+    @chat = Chat.new
   end
 
   def create
@@ -7,15 +8,15 @@ class ChatsController < ApplicationController
 
     respond_to do |format|
       if @chat.save
-        format.html {  }
-        format.json { render: :show, location: @chat }
+        format.json { render :show, status: :created, location: @chat }
       else
-        format.json { render: :new, notice: 'not created' }
+        format.json { render json: @chat.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def new
+    @chat = Chat.new
   end
 
   def show
