@@ -12,7 +12,7 @@ class ChatroomsController < ApplicationController
 
     respond_to do |format|
       if @chatroom.save
-        format.html { redirect_to @chatroom, notice: 'Employee was successfully created.' }
+        format.html { redirect_to @chatroom }
         format.json { render :show, status: :created, location: @chatroom }
       else
         format.html { render :new }
@@ -22,6 +22,8 @@ class ChatroomsController < ApplicationController
   end
 
   def show
+    @chatroom = Chatroom.find(params[:id])
+    render json: @chatroom.chats
   end
 
   private
