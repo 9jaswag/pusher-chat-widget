@@ -5,13 +5,26 @@
       <p class="lead">Realtime chat.</p>
     </div>
   </div>
-  <div class="popup-trigger bg-info text-white col-3">
+  <div class="popup-trigger bg-info text-white col-3 collapse">
     <p>Chat with support</p>
   </div>
 
-  <div class="popup-wrapper bg-white col-3 p-0 collapse">
+  <div class="popup-wrapper bg-white col-3 p-0">
     <div class="popup-head bg-info p-1">
       <p>Close chat window</p>
+    </div>
+    <div class="start-chat-wrapper bg-light px-1 mt-5">
+      <%= form_with(model: @chat, remote: true, format: :json, id: 'chat-form') do |form| %>
+        <div class="field">
+          <%= form.text_field :name, id: :name, class: "form-control", required: true, placeholder: "Enter your name" %>
+        </div>
+        <div class="field">
+          <%= form.email_field :email, id: :email, class: "form-control mt-3", required: true, placeholder: "Enter your email" %>
+        </div>
+        <div class="actions">
+          <%= form.submit 'Start chat', class: "btn btn-primary btn-block mt-2" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
