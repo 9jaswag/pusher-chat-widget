@@ -19,3 +19,51 @@
  body {
   font-family: 'Tajawal', sans-serif;
  }
+
+ .full-page {
+   height: 100vh;
+   width: 100vw;
+   overflow: hidden;
+ }
+
+ .jumbotron {
+   margin-top: 8rem;
+ }
+
+ .popup-wrapper {
+   height: 20rem;
+   position: fixed;
+   right: 1rem;
+   bottom: 0;
+   border-radius: 3px;
+ }
+
+ .popup-head {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+
+    p {
+      margin: 0;
+    }
+ }
+
+ .popup-trigger {
+  height: 2rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  position: fixed;
+  bottom: 0;
+  right: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+    p {
+      margin: 0;
+      font-weight: 900;
+    }
+}
