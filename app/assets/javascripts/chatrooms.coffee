@@ -16,6 +16,10 @@ $(document).ready =>
     return
 
   $('#start-chat-form').on 'ajax:success', (data) ->
-    console.log data.detail[0]
+    chatroom = data.detail[0]
+    $('.chat-form').removeClass('collapse')
+    $('.start-chat-wrapper').addClass('collapse')
+    $('#chat-form #name').val(chatroom.name)
+    $('#chat-form #chatroom_id').val(chatroom.id)
     $('#start-chat-form')[0].reset()
     return

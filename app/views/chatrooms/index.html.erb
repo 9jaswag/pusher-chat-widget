@@ -26,6 +26,25 @@
         </div>
       <% end %>
     </div>
+    <div class="chat-wrapper bg-light px-1 collapse">
+      <div class="chats">
+        <div class="chat-bubble-wrapper d-block">
+          <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block">
+            <small class="chat-username">John Doe</small>
+            <p class="m-0 chat-message">I need something o</p>
+          </div>
+        </div>
+      </div>
+      <div class="chat-form">
+        <%= form_with(model: @chat, remote: true, format: :json, id: 'chat-form') do |form| %>
+          <div class="field">
+            <%= form.text_field :message, id: :message, class: "form-control", required: true, placeholder: "Enter your message" %>
+            <%= form.hidden_field :name, id: :name %>
+            <%= form.hidden_field :chatroom_id, id: :chatroom_id %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
