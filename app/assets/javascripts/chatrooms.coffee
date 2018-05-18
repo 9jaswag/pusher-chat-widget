@@ -89,17 +89,27 @@ $(document).ready =>
       """
     return
 
+  updateAdminChatrooms = (chatroom) ->
+    $('.sidebar').append """
+      <div class="dashboard-sidebar-chat bg-info">
+        <a class="sidebar-chat" data-remote="true" href="/chats/#{chatroom.id}">#{chatroom.email}</a>
+      </div>
+    """
+    return
+
   $('#admin-chat-form').on 'ajax:success', (data) ->
     chat = data.detail[0]
     $('#admin-chat-form')[0].reset()
     return
 
   Pusher.logToConsole = true
-  pusher = new Pusher('9d1f66bd33f98722c319',
-    cluster: 'eu'
+  pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',
+    cluster: '<%= ENV["PUSHER_CLUSTER"] %>'
     encrypted: true)
   channel = pusher.subscribe('chat')
   channel.bind 'new-chat', (data) ->
     updateChat data
     updateAdminChat data
+  channel.bind 'new-chatroom', (data) ->
+    updateAdminChatrooms data
     return

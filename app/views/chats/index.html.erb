@@ -1,6 +1,6 @@
 <div class="container-fluid full-page position-relative">
   <div class="row">
-    <div class="col-3 col-md-2 bg-dark full-page px-1 py-2">
+    <div class="col-3 col-md-2 bg-dark full-page px-1 py-2 sidebar">
       <% @chatrooms.each do |chatroom| %>
         <% if chatroom.chats.any? %>
           <div class="dashboard-sidebar-chat bg-info">
@@ -28,4 +28,3 @@
   </div>
 </div>
 
-<%# <div class=""></div> %>
