@@ -59,6 +59,7 @@ $(document).ready =>
 
   loadAdminChat = (chatArray) ->
     $('.admin-chats').html ""
+    $('input#chatroom_id').val(chatArray.chats[0].chatroom_id)
     $.map(chatArray.chats, (chat) ->
       # Do something
       $('.admin-chats').append """
@@ -71,10 +72,15 @@ $(document).ready =>
       """
       return
     )
-    # $('.admin-chats').append chats
     return
   
   $(".sidebar-chat").on 'ajax:success', (data) ->
     chat = data.detail[0]
     # console.log chat
     loadAdminChat chat
+
+  $('#admin-chat-form').on 'ajax:success', (data) ->
+    chat = data.detail[0]
+    console.log chat
+    $('#admin-chat-form')[0].reset()
+    return
