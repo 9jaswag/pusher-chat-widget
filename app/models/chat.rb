@@ -3,6 +3,6 @@ class Chat < ApplicationRecord
   belongs_to :chatroom
 
   def notify_pusher
-    # Pusher.trigger('chat', 'new-chat', self.as_json)
+    Pusher.trigger('chat', 'new-chat', self.as_json)
   end
 end

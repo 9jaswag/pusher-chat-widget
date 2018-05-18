@@ -40,20 +40,19 @@ $(document).ready =>
     return
   
   updateChat = (data) ->
-    $('.chats').append """
-      <div class="chat-bubble-wrapper d-block">
-        <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block">
-          <small class="chat-username">#{data.name}</small>
-          <p class="m-0 chat-message">#{data.message}</p>
+    if data.chatroom_id == parseInt($('input#chatroom_id').val())
+      $('.chats').append """
+        <div class="chat-bubble-wrapper d-block">
+          <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block">
+            <small class="chat-username">#{data.name}</small>
+            <p class="m-0 chat-message">#{data.message}</p>
+          </div>
         </div>
-      </div>
-    """
+      """
     return
 
   $('#chat-form').on 'ajax:success', (data) ->
     chat = data.detail[0]
-    console.log chat
-    updateChat chat
     $('#chat-form')[0].reset()
     return
 
@@ -79,18 +78,28 @@ $(document).ready =>
     loadAdminChat chat
 
   updateAdminChat = (chat) ->
-    $('.admin-chats').append """
-      <div class="chat-bubble-wrapper d-block">
-        <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block" style="min-width: 10rem;">
-          <small class="chat-username">#{chat.name}</small>
-          <p class="m-0 chat-message">#{chat.message}</p>
+    if chat.chatroom_id == parseInt($('input#chatroom_id').val())
+      $('.admin-chats').append """
+        <div class="chat-bubble-wrapper d-block">
+          <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block" style="min-width: 10rem;">
+            <small class="chat-username">#{chat.name}</small>
+            <p class="m-0 chat-message">#{chat.message}</p>
+          </div>
         </div>
-      </div>
-    """
+      """
     return
 
   $('#admin-chat-form').on 'ajax:success', (data) ->
     chat = data.detail[0]
-    updateAdminChat chat
     $('#admin-chat-form')[0].reset()
+    return
+
+  Pusher.logToConsole = true
+  pusher = new Pusher('9d1f66bd33f98722c319',
+    cluster: 'eu'
+    encrypted: true)
+  channel = pusher.subscribe('chat')
+  channel.bind 'new-chat', (data) ->
+    updateChat data
+    updateAdminChat data
     return
