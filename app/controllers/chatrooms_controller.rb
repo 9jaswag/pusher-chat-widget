@@ -24,16 +24,6 @@ class ChatroomsController < ApplicationController
   def show
     @chatroom = Chatroom.find(params[:id])
     render json: @chatroom.chats
-
-    # respond_to do |format|
-    #   if @chatroom
-    #     format.html { redirect_to @chatroom }
-    #     format.json { render :show, status: :ok, location: @chatroom }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @chatroom.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   private
