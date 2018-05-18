@@ -35,7 +35,6 @@ $(document).ready =>
         xhr.setRequestHeader 'X-CSRF-Token', token
         return
       success: (data) ->
-        console.log data
         return
     return
   
@@ -72,10 +71,10 @@ $(document).ready =>
     )
     return
   
-  $(".sidebar-chat").on 'ajax:success', (data) ->
+  $('body').on 'ajax:success', '.sidebar-chat', (data) ->
     chat = data.detail[0]
-    # console.log chat
     loadAdminChat chat
+    return
 
   updateAdminChat = (chat) ->
     if chat.chatroom_id == parseInt($('input#chatroom_id').val())
@@ -102,7 +101,6 @@ $(document).ready =>
     $('#admin-chat-form')[0].reset()
     return
 
-  Pusher.logToConsole = true
   pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',
     cluster: '<%= ENV["PUSHER_CLUSTER"] %>'
     encrypted: true)
