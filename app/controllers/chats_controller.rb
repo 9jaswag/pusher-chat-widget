@@ -31,10 +31,6 @@ class ChatsController < ApplicationController
     end
   end
 
-  def dashboard
-    # @chats = Chats.all.order(:id)
-  end
-
   private
     def chat_params
       params.require(:chat).permit(:message, :name, :chatroom_id)
