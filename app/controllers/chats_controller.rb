@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   def index
-    @chat = Chat.new
+    @chats = Chatroom.all
   end
 
   def create
@@ -20,10 +20,19 @@ class ChatsController < ApplicationController
   end
 
   def show
+    @chats = Chat.where(chatroom_id: params[:id])
+
+    respond_to do |format|
+      if @chats
+        format.json { render :chats, status: :ok }
+      else
+        format.json { render json: @chats.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def dashboard
-    @chats = Chats.all.order(:id)
+    # @chats = Chats.all.order(:id)
   end
 
   private
