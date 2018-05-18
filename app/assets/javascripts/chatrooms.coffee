@@ -61,7 +61,6 @@ $(document).ready =>
     $('.admin-chats').html ""
     $('input#chatroom_id').val(chatArray.chats[0].chatroom_id)
     $.map(chatArray.chats, (chat) ->
-      # Do something
       $('.admin-chats').append """
         <div class="chat-bubble-wrapper d-block">
           <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block" style="min-width: 10rem;">
@@ -79,8 +78,19 @@ $(document).ready =>
     # console.log chat
     loadAdminChat chat
 
+  updateAdminChat = (chat) ->
+    $('.admin-chats').append """
+      <div class="chat-bubble-wrapper d-block">
+        <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block" style="min-width: 10rem;">
+          <small class="chat-username">#{chat.name}</small>
+          <p class="m-0 chat-message">#{chat.message}</p>
+        </div>
+      </div>
+    """
+    return
+
   $('#admin-chat-form').on 'ajax:success', (data) ->
     chat = data.detail[0]
-    console.log chat
+    updateAdminChat chat
     $('#admin-chat-form')[0].reset()
     return
