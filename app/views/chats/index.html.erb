@@ -1,0 +1,37 @@
+<div class="container-fluid full-page position-relative">
+  <div class="row">
+    <div class="col-3 col-md-2 bg-dark full-page px-1 py-2">
+      <% @chats.each do |chat| %>
+        <div class="dashboard-sidebar-chat bg-info">
+          <%= link_to chat.email, chat_path(id: chat.id), remote: true, class: 'sidebar-chat' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-9 col-md-10 bg-light full-page container">
+      <h5 class="mt-4">👈 Select a chat from the sidebar to load the message</h5>
+      <div class="admin-chat-wrapper">
+        <h3 class="user-email mt-5">admin@email.com</h3>
+        <div class="chat-form">
+          <div class="admin-chats">
+            <%# <div class="chat-bubble-wrapper d-block">
+              <div class="chat-bubble bg-dark p-1 text-white my-1 d-inline-block" style="min-width: 10rem;">
+                <small class="chat-username">Name</small>
+                <p class="m-0 chat-message">Message</p>
+              </div>
+            </div> %>
+          </div>
+
+          <%= form_with( scope: :chat, url: chats_path, format: :json, id: 'chat-form') do |form| %>
+            <div class="field">
+              <%= form.text_field :message, id: :message, class: "form-control", required: true, placeholder: "Enter your message" %>
+              <%= form.hidden_field :name, id: :name, value: 'Pusher support' %>
+              <%= form.hidden_field :chatroom_id, id: :chatroom_id %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# <div class=""></div> %>
