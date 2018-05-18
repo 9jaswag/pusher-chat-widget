@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   def index
-    @chats = Chatroom.all
+    @chatrooms = Chatroom.all
   end
 
   def create
