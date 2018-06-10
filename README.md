@@ -3,6 +3,8 @@ Build a live chat widget with Ruby and Pusher Channels
 
 A tutorial to showcase realtime functionality of Pusher Channels in Ruby
 
+[View tutorial](https://pusher.com/tutorials/live-chat-ruby)
+
 
 Getting Started
 ------
