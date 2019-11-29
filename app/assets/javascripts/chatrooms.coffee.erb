@@ -102,7 +102,7 @@ $(document).ready =>
     return
 
   pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',
-    cluster: '<%= ENV["PUSHER_CLUSTER"] %>'
+    cluster: '<%= ENV["PUSHER_CLUSTER"] %>',
     encrypted: true)
   channel = pusher.subscribe('chat')
   channel.bind 'new-chat', (data) ->
